@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles-menu.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff1744'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+    <title>Júlia & Carlos 💕</title>
+</head>
+<body>
+    <div class="coracoes"></div>
+
+    <main class="card-central">
+        <h1 class="titulo-casal">Júlia <span class="heart">❤️</span> Carlos</h1>
+        <p class="subtitulo">Nosso amor em cada detalhe</p>
+
+        <div class="contador" id="contador">
+            <div class="bloco">
+                <span class="numero" id="dias">00</span>
+                <span class="rotulo">dias</span>
+            </div>
+            <div class="sep">:</div>
+            <div class="bloco">
+                <span class="numero" id="horas">00</span>
+                <span class="rotulo">horas</span>
+            </div>
+            <div class="sep">:</div>
+            <div class="bloco">
+                <span class="numero" id="minutos">00</span>
+                <span class="rotulo">minutos</span>
+            </div>
+            <div class="sep">:</div>
+            <div class="bloco">
+                <span class="numero" id="segundos">00</span>
+                <span class="rotulo">segundos</span>
+            </div>
+        </div>
+
+        <p class="data-inicio">Desde 31 de agosto de 2025 💑</p>
+        <p class="anos-meses" id="anos-meses"></p>
+
+        <div class="eventos">
+            <a href="mural.html" class="card-evento">
+                <span class="icone">💌</span>
+                <span class="nome">Mural de Recados</span>
+                <span class="seta">→</span>
+            </a>
+            <a href="pag01.html" class="card-evento">
+                <span class="icone">🌹</span>
+                <span class="nome">Dia das Mulheres</span>
+                <span class="seta">→</span>
+            </a>
+            <a href="pag02.html" class="card-evento">
+                <span class="icone">💕</span>
+                <span class="nome">Dia dos Namorados</span>
+                <span class="seta">→</span>
+            </a>
+        </div>
+
+        <div class="usuario-info">
+            <span id="nome-usuario" class="nome-usuario"></span>
+            <a href="index.html" class="sair">Sair</a>
+        </div>
+    </main>
+
+    <script src="javascript/menu.js"></script>
+    <script src="javascript/contador.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const nome = localStorage.getItem("usuarioLogado");
+            if (nome) document.getElementById("nome-usuario").textContent = "💕 " + nome;
+        });
+    </script>
+    <script>
+        function criarCoracao() {
+            const el = document.createElement("div");
+            el.classList.add("coracao");
+            el.textContent = ["❤️", "💕", "💖", "💗", "💝"][Math.floor(Math.random() * 5)];
+            el.style.left = Math.random() * 100 + "%";
+            el.style.fontSize = (10 + Math.random() * 16) + "px";
+            el.style.animationDuration = (8 + Math.random() * 10) + "s";
+            el.style.animationDelay = Math.random() * 5 + "s";
+            document.querySelector(".coracoes").appendChild(el);
+            setTimeout(() => el.remove(), 20000);
+        }
+        for (let i = 0; i < 12; i++) setTimeout(criarCoracao, i * 400);
+        setInterval(criarCoracao, 1200);
+    </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ===== Menu Flutuante ===== */
+#menu-flutuante {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+}
+
+#menu-hamburguer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s;
+}
+
+#menu-hamburguer:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#menu-hamburguer span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+#menu-hamburguer.ativo span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#menu-hamburguer.ativo span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-hamburguer.ativo span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+#menu-lista {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#menu-lista.aberto {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#menu-lista a {
+    display: block;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+#menu-lista a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#menu-lista a.ativo {
+    color: #ffb6c1;
+    font-weight: 600;
+    background: rgba(255, 182, 193, 0.1);
+    pointer-events: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0a0e 0%, #2d1219 30%, #1c0a12 70%, #0d0a0a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(180, 40, 80, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(200, 60, 100, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.coracoes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.coracao {
+    position: absolute;
+    font-size: 14px;
+    animation: flutuar linear infinite;
+    opacity: 0;
+}
+
+@keyframes flutuar {
+    0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+.card-mural {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: entrar 1s ease;
+    margin: 20px auto;
+}
+
+@keyframes entrar {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.titulo-mural {
+    color: #ffb6c1;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.subtitulo-mural {
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+.form-recado {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-nome {
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    outline: none;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.input-nome:focus {
+    border-color: rgba(255, 182, 193, 0.4);
+}
+
+.input-nome::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input-texto {
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    outline: none;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.3s;
+}
+
+.input-texto:focus {
+    border-color: rgba(255, 182, 193, 0.4);
+}
+
+.input-texto::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-enviar {
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(180, 40, 80, 0.7), rgba(220, 60, 100, 0.7));
+    border: none;
+    border-radius: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.btn-enviar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(180, 40, 80, 0.3);
+}
+
+.divider-mural {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 182, 193, 0.4), transparent);
+    margin: 25px auto;
+}
+
+.lista-recados {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.lista-recados::-webkit-scrollbar {
+    width: 4px;
+}
+
+.lista-recados::-webkit-scrollbar-thumb {
+    background: rgba(255, 182, 193, 0.2);
+    border-radius: 4px;
+}
+
+.recado {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 14px 18px;
+    animation: aparecerRecado 0.4s ease;
+}
+
+@keyframes aparecerRecado {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.recado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.recado-nome {
+    color: #ffb6c1;
+    font-size: 0.9rem;
+}
+
+.recado-data {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.75rem;
+}
+
+.recado-titulo {
+    color: rgba(255, 182, 193, 0.7);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.recado-texto {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.vazio {
+    color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9rem;
+}
+
+.voltar {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-voltar-mural {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-voltar-mural:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 500px) {
+    .card-mural {
+        padding: 30px 18px;
+    }
+    .titulo-mural {
+        font-size: 1.5rem;
+    }
+}

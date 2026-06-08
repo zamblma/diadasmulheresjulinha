@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles-mural.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff1744'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+    <title>Mural de Recados 💌</title>
+</head>
+<body>
+    <div class="coracoes"></div>
+
+    <main class="card-mural">
+        <h1 class="titulo-mural">💌 Mural de Recados</h1>
+        <p class="subtitulo-mural">Deixe suas mensagens aqui quando quiser!</p>
+
+        <form id="form-recado" class="form-recado">
+            <input id="titulo-recado" class="input-nome" type="text" placeholder="Título (opcional)">
+            <textarea id="texto-recado" class="input-texto" placeholder="Escreva sua mensagem..." required></textarea>
+            <button type="submit" class="btn-enviar">Enviar 💕</button>
+        </form>
+
+        <div class="divider-mural"></div>
+
+        <div id="lista-recados" class="lista-recados"></div>
+
+        <div class="voltar">
+            <a href="menu.html" class="btn-voltar-mural">← Voltar ao Menu</a>
+        </div>
+    </main>
+
+    <script src="javascript/menu.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="javascript/mural.js"></script>
+    <script>
+        function criarCoracao() {
+            const el = document.createElement("div");
+            el.classList.add("coracao");
+            el.textContent = ["❤️", "💕", "💖", "💗"][Math.floor(Math.random() * 4)];
+            el.style.left = Math.random() * 100 + "%";
+            el.style.fontSize = (10 + Math.random() * 14) + "px";
+            el.style.animationDuration = (10 + Math.random() * 12) + "s";
+            el.style.animationDelay = Math.random() * 6 + "s";
+            document.querySelector(".coracoes").appendChild(el);
+            setTimeout(() => el.remove(), 25000);
+        }
+        for (let i = 0; i < 6; i++) setTimeout(criarCoracao, i * 500);
+        setInterval(criarCoracao, 1500);
+    </script>
+</body>
+</html>

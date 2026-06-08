@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+/* ===== Menu Flutuante ===== */
+#menu-flutuante {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+}
+
+#menu-hamburguer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s;
+}
+
+#menu-hamburguer:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#menu-hamburguer span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+#menu-hamburguer.ativo span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#menu-hamburguer.ativo span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-hamburguer.ativo span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+#menu-lista {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#menu-lista.aberto {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#menu-lista a {
+    display: block;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+#menu-lista a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+#menu-lista a.ativo {
+    color: #ffb6c1;
+    font-weight: 600;
+    background: rgba(255, 182, 193, 0.1);
+    pointer-events: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #d4cfcf url(imagem/carlosjulia1.jpg);
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 150px 60px rgba(200, 195, 195, 0.6);
+    pointer-events: none;
+}
+
+.coracoes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.coracao {
+    position: absolute;
+    font-size: 16px;
+    animation: flutuar linear infinite;
+    opacity: 0;
+}
+
+@keyframes flutuar {
+    0% {
+        transform: translateY(105vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.15;
+    }
+    90% {
+        opacity: 0.15;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.card-central {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 50px 35px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: entrar 1s ease;
+}
+
+@keyframes entrar {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.titulo-casal {
+    font-family: "Dancing Script", cursive;
+    font-size: 2.8rem;
+    color: #ffb6c1;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.heart {
+    display: inline-block;
+    animation: bater 1.2s ease-in-out infinite;
+    color: #ff4d6d;
+}
+
+@keyframes bater {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+.subtitulo {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.contador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 65px;
+}
+
+.numero {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffb6c1;
+    text-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
+    line-height: 1;
+}
+
+.rotulo {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.sep {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 20px;
+}
+
+.data-inicio {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.anos-meses {
+    color: rgba(255, 182, 193, 0.5);
+    font-size: 0.9rem;
+    margin-bottom: 35px;
+    font-weight: 500;
+}
+
+.eventos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.card-evento {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    transition: background 0.3s, transform 0.2s, border-color 0.3s;
+}
+
+.card-evento:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 182, 193, 0.2);
+    transform: translateX(4px);
+}
+
+.icone {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.nome {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.seta {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.card-evento:hover .seta {
+    transform: translateX(4px);
+}
+
+.usuario-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.nome-usuario {
+    color: rgba(255, 182, 193, 0.5);
+    font-size: 0.85rem;
+}
+
+.sair {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.3s, color 0.3s;
+}
+
+.sair:hover {
+    background: rgba(255, 70, 70, 0.15);
+    color: rgba(255, 100, 100, 0.6);
+    border-color: rgba(255, 70, 70, 0.1);
+}
+
+@media (max-width: 500px) {
+    .card-central {
+        padding: 35px 20px 30px;
+    }
+    .titulo-casal {
+        font-size: 2rem;
+    }
+    .numero {
+        font-size: 1.8rem;
+    }
+    .bloco {
+        min-width: 50px;
+    }
+}
