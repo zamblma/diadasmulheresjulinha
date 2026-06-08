@@ -281,7 +281,87 @@ body::before {
     box-shadow: 0 8px 35px rgba(180, 0, 40, 0.6);
 }
 
+.player-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 140px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.player-icon {
+    font-size: 1rem;
+}
+
+.player-nome {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.player-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.player-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ffb6c1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #ffb6c1;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.player-porcentagem {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.7rem;
+    min-width: 28px;
+    text-align: right;
+}
+
 @media (max-width: 600px) {
+    .player-widget {
+        bottom: 16px;
+        right: 16px;
+        padding: 8px 12px;
+        min-width: 120px;
+    }
     .mensagem {
         padding: 30px 18px;
         font-size: 0.9rem;
