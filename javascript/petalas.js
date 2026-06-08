@@ -40,4 +40,5 @@ function criarPetala() {
     }, (duracao + atraso) * 2000);
 }
 
-setInterval(criarPetala, 350);
+var intervalo = window.innerWidth < 600 ? 600 : 350;
+setInterval(criarPetala, intervalo);

@@ -226,3 +226,21 @@ body::before {
 #toggleSenha:hover {
     color: rgba(255, 255, 255, 0.6);
 }
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 30px 20px;
+    }
+    .container h1 {
+        font-size: 28px;
+    }
+    .remember-forgot {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    .input-box {
+        margin: 20px 0;
+    }
+}

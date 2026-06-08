@@ -343,15 +343,29 @@ body::before {
 
 @media (max-width: 500px) {
     .card-central {
-        padding: 35px 20px 30px;
+        padding: 30px 16px 25px;
     }
     .titulo-casal {
-        font-size: 2rem;
-    }
-    .numero {
         font-size: 1.8rem;
     }
+    .numero {
+        font-size: 1.5rem;
+    }
     .bloco {
-        min-width: 50px;
+        min-width: 42px;
+    }
+    .sep {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+    .card-evento {
+        padding: 14px 16px;
+    }
+    .contador {
+        gap: 4px;
+    }
+    .subtitulo {
+        font-size: 0.75rem;
+        margin-bottom: 25px;
     }
 }

@@ -341,9 +341,25 @@ body::before {
 
 @media (max-width: 500px) {
     .card-mural {
-        padding: 30px 18px;
+        padding: 25px 14px;
     }
     .titulo-mural {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+    .subtitulo-mural {
+        font-size: 0.8rem;
+    }
+    .input-texto {
+        min-height: 70px;
+        font-size: 16px;
+    }
+    .input-nome {
+        font-size: 16px;
+    }
+    .lista-recados {
+        max-height: 350px;
+    }
+    .recado {
+        padding: 12px 14px;
     }
 }
