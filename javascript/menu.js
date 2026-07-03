@@ -1,9 +1,9 @@
 const eventos = [
     { nome: "Menu",              pagina: "menu.html" },
     { nome: "Mural de Recados",  pagina: "mural.html" },
-    { nome: "Aniversário Júlia", pagina: "pag03.html" },
     { nome: "Dia das Mulheres",  pagina: "pag01.html" },
     { nome: "Dia dos Namorados", pagina: "pag02.html" },
+    { nome: "Aniversário Júlia", pagina: "pag03.html" },
 ];
 
 function criarMenu() {
