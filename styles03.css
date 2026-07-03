@@ -38,16 +38,16 @@
 
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a0a0e 0%, #3d1a2e 30%, #1c0a12 70%, #0d0a0a 100%);
+    background: #1a0a0e url(imagem/julinhanene.jpg) no-repeat center center;
+    background-size: contain;
+    background-attachment: fixed;
     display: flex; justify-content: center; align-items: flex-start;
     position: relative; overflow-x: hidden;
 }
 
 body::before {
     content: ""; position: fixed; inset: 0;
-    background:
-        radial-gradient(ellipse at 20% 50%, rgba(255, 150, 50, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 50%, rgba(255, 100, 150, 0.08) 0%, transparent 50%);
+    background: rgba(0, 0, 0, 0.4);
     pointer-events: none;
 }
 
