@@ -187,3 +187,24 @@ body::before {
     background: rgba(0, 0, 0, 0.75);
     transform: scale(1.05);
 }
+
+/* Confete */
+@keyframes confeteCair {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+/* Corações subindo */
+@keyframes coracaoSubir {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.8; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+}
+
+/* Brilhos */
+@keyframes brilhoPiscar {
+    0%   { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50%  { opacity: 1; transform: scale(1.2) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0.5) rotate(360deg); }
+}
