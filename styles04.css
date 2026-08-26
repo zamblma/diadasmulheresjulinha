@@ -39,16 +39,15 @@
 
 body {
     min-height: 100vh;
-    background: #1a0a0e url(imagem/foto2namoro.jpg) no-repeat center center;
-    background-size: contain;
-    background-attachment: fixed;
+    background: url(imagem/foto2namoro.jpg) no-repeat center center;
+    background-size: cover;
     display: flex; justify-content: center; align-items: flex-start;
     position: relative; overflow-x: hidden;
 }
 
 body::before {
     content: ""; position: fixed; inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.35);
     pointer-events: none;
 }
 
