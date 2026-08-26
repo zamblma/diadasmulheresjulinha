@@ -4,6 +4,7 @@ const eventos = [
     { nome: "Dia das Mulheres",  pagina: "pag01.html" },
     { nome: "Dia dos Namorados", pagina: "pag02.html" },
     { nome: "Aniversário Júlia", pagina: "pag03.html" },
+    { nome: "Primeiro Ano",     pagina: "pag04.html" },
 ];
 
 function criarMenu() {

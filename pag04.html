@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles04.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff1744'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
+    <title>Feliz Primeiro Ano! ❤️</title>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleMensagem()">Ocultar texto</button>
+
+    <div class="mensagem" id="mensagem">
+        <h1>Feliz Primeiro Ano de Namoro! ❤️</h1>
+        <p>
+            Nosso primeiro ano de namoro vai ser dia 31 de agosto, e eu ainda fico sem palavras para expressar tudo. Uma simples vontade de te conhecer fez acontecer uma união de aniversários e o primeiro churrasco que organizei, para no fim dar certo e ter o privilégio de poder sentir sua boca na minha. Aquele dia eu pensei que eu iria ser eu mesmo, e se fosse para você gostar de mim, que acontecesse vendo meu lado feliz. Acho que deu certo.
+        </p>
+        <p>
+            Na segunda edição do churrasco, já éramos um casal que, no outro dia do evento aclamado, estávamos oficializados. Parece que tudo aconteceu ontem, eu lembro de cada detalhe desses momentos que aconteceram em nossa relação, e acho que isso é bom, porque nunca me forço a guardar eles e sempre estão lá.
+        </p>
+        <p>
+            No dia 31 de agosto vou ser um homem muito feliz, por poder ter uma relação leve e saudável com você. Obrigado por me entender e gostar de mim. Tenho problemas de insegurança e autoestima que me colocam para baixo e me trazem pensamentos de autossabotagem com frequência. Mesmo assim, você não me xinga, não ajuda a me empurrar para baixo, e isso é... estranho. Sinto que sou errado esse tempo todo, e talvez seja mais uma força para melhorar.
+        </p>
+        <p>
+            Eu te amo, Júlia, e quero viver uma vida com você, onde eu possa ter a liberdade de me sentir o melhor namorado do mundo sempre.
+        </p>
+        <p style="margin-top: 16px;">
+            Feliz primeiro ano de namoro.<br>
+            31/08/2026
+        </p>
+        <div class="divider"></div>
+        <p class="te-amo">Feliz Primeiro Ano! ❤️</p>
+    </div>
+
+    <div class="petalas"></div>
+
+    <audio id="bg-music" autoplay loop>
+        <source src="musica/monalisa.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="player-widget">
+        <div class="player-info">
+            <span class="player-icon">🎵</span>
+            <span class="player-nome">Monalisa</span>
+        </div>
+        <div class="player-controles">
+            <input type="range" id="player-volume" class="player-slider" min="0" max="100" value="10">
+            <span class="player-porcentagem" id="player-porcentagem">10%</span>
+        </div>
+    </div>
+
+    <script src="javascript/menu.js"></script>
+    <script src="javascript/musica.js"></script>
+    <script src="javascript/botaoocultar.js"></script>
+    <script src="javascript/petalas.js"></script>
+</body>
+</html>
