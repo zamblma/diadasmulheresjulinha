@@ -3,30 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ✅ <link> agora está dentro do <head> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff1744'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
-    <title>Recuperar Senha</title>
+    <title>Recuperar Senha 💕</title>
 </head>
 <body>
+    <div class="coracoes"></div>
+    <div id="toast" class="toast"></div>
+
     <main class="container">
-        <h1>Recuperar Senha</h1>
+        <form onsubmit="recuperarSenha(event)">
+            <h1>Recuperar Senha</h1>
 
-        <p style="text-align: center; margin: 10px 0 20px; font-size: 14px;">
-            Digite seu e-mail e enviaremos um link para redefinir sua senha.
-        </p>
+            <p style="text-align: center; margin: -10px 0 24px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5;">
+                Digite seu e-mail cadastrado e enviaremos um link para você redefinir sua senha com carinho. 💕
+            </p>
 
-        <div class="input-box">
-            <input id="email" placeholder="Seu e-mail" type="email" required>
-            <i class="bx bxs-envelope"></i>
-        </div>
+            <div class="input-box">
+                <input id="email" placeholder="Seu e-mail" type="email" required autofocus>
+                <i class="bx bxs-envelope"></i>
+            </div>
 
-        <button type="submit" class="login">Enviar link</button>
+            <button type="submit" class="login">Enviar link de recuperação 💕</button>
 
-        <div class="register-link">
-            <p><a href="index.html">← Voltar para o Login</a></p>
-        </div>
+            <div class="register-link">
+                <p><a href="index.html">← Voltar para o Login</a></p>
+            </div>
+        </form>
     </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfJdafpQWBeD-bjVv8TK_0A6pfG2Oj0po",
+            authDomain: "sitejulia-f3911.firebaseapp.com",
+            projectId: "sitejulia-f3911",
+            storageBucket: "sitejulia-f3911.firebasestorage.app",
+            messagingSenderId: "976097806494",
+            appId: "1:976097806494:web:87322ea287aaddaf0ad38f"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+        function mostrarToast(mensagem, tipo) {
+            const toast = document.getElementById("toast");
+            toast.textContent = mensagem;
+            toast.className = "toast";
+            if (tipo === "success") {
+                toast.style.background = "rgba(40, 167, 69, 0.9)";
+            } else if (tipo === "info") {
+                toast.style.background = "rgba(100, 100, 200, 0.9)";
+            } else {
+                toast.style.background = "rgba(200, 40, 60, 0.9)";
+            }
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 4000);
+        }
+
+        function recuperarSenha(e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value.trim();
+
+            mostrarToast("Enviando e-mail... 💕", "info");
+
+            firebase.auth().sendPasswordResetEmail(email)
+                .then(() => {
+                    mostrarToast("Link enviado para o seu e-mail com sucesso! 💕", "success");
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 2500);
+                })
+                .catch((err) => {
+                    mostrarToast("Não encontramos esse e-mail ou ocorreu um erro.");
+                });
+        }
+
+        function criarCoracao() {
+            const el = document.createElement("div");
+            el.classList.add("coracao");
+            el.textContent = ["❤️", "💕", "💖", "💗"][Math.floor(Math.random() * 4)];
+            el.style.left = Math.random() * 100 + "%";
+            el.style.fontSize = (10 + Math.random() * 14) + "px";
+            el.style.animationDuration = (10 + Math.random() * 12) + "s";
+            el.style.animationDelay = Math.random() * 6 + "s";
+            document.querySelector(".coracoes")?.appendChild(el);
+            setTimeout(() => el.remove(), 25000);
+        }
+        for (let i = 0; i < 8; i++) setTimeout(criarCoracao, i * 500);
+        setInterval(criarCoracao, 1500);
+    </script>
 </body>
 </html>

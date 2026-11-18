@@ -13,7 +13,7 @@ const db = firebase.firestore();
 function formatarData(timestamp) {
     if (!timestamp) return "";
     const d = timestamp.toDate();
-    return d.toLocaleDateString("pt-BR") + " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 }
 
 function carregarRecados() {
@@ -26,7 +26,7 @@ function carregarRecados() {
             div.className = "recado";
             div.innerHTML = `
                 <div class="recado-header">
-                    <strong class="recado-nome">${msg.nome || "Anônimo"}</strong>
+                    <strong class="recado-nome">💌 ${msg.nome || "Anônimo"}</strong>
                     <span class="recado-data">${formatarData(msg.criadoEm)}</span>
                 </div>
                 ${msg.titulo ? `<h3 class="recado-titulo">${msg.titulo}</h3>` : ""}
@@ -35,7 +35,7 @@ function carregarRecados() {
             lista.appendChild(div);
         });
         if (snapshot.empty) {
-            lista.innerHTML = '<p class="vazio">Nenhum recado ainda. Seja o primeiro! 💕</p>';
+            lista.innerHTML = '<p class="vazio">Nenhum recado ainda. Deixe sua primeira mensagem de amor! 💕</p>';
         }
     });
 }
@@ -44,7 +44,7 @@ function obterUsuario() {
     const storage = localStorage.getItem("usuarioLogado");
     if (storage) return storage;
     const user = firebase.auth().currentUser;
-    return user ? (user.displayName || user.email.split("@")[0]) : "Anônimo";
+    return user ? (user.displayName || user.email.split("@")[0]) : "Amor 💕";
 }
 
 function enviarRecado(event) {
