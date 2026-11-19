@@ -5,6 +5,7 @@ function toggleMensagem() {
     if (!msg || !btn) return;
 
     msg.classList.toggle("hidden");
+    document.body.classList.toggle("modo-foto", msg.classList.contains("hidden"));
 
     if (msg.classList.contains("hidden")) {
         btn.innerHTML = "<span>👁️ Ver mensagem</span>";

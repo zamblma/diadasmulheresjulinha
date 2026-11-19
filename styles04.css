@@ -10,25 +10,61 @@
 
 body {
     min-height: 100vh;
-    background: #14080a url("imagem/foto2namoro.jpg") no-repeat center center fixed;
-    background-size: cover;
+    min-height: 100dvh;
+    background-color: #100608;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 60px 20px;
+    padding: 70px 20px 60px;
     overflow-x: hidden;
     color: #fff;
 }
 
+/* Camada 1: Blur ambiente que preenche toda a tela */
 body::before {
     content: "";
     position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(20, 6, 10, 0.5) 0%, rgba(10, 3, 5, 0.86) 100%);
-    backdrop-filter: blur(2px);
-    pointer-events: none;
+    inset: -30px;
+    background: url("imagem/foto2namoro.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(28px) brightness(0.38) saturate(140%);
+    transform: scale(1.06);
     z-index: 0;
+    pointer-events: none;
+}
+
+/* Camada 2: Foto nítida e bem dimensionada */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("imagem/foto2namoro.jpg") no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.85;
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.6));
+    transition: all 0.4s ease;
+}
+
+/* No celular: Foto 100% COMPLETA (contain), sem cortar absolutamente nada */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        padding: 80px 14px 60px;
+    }
+
+    body::after {
+        background-size: contain;
+        background-position: center center;
+        opacity: 0.95;
+    }
+}
+
+body.modo-foto::after {
+    background-size: contain;
+    opacity: 1;
 }
 
 /* ===== Menu Flutuante ===== */
@@ -47,17 +83,18 @@ body::before {
     gap: 6px;
     width: 46px;
     height: 46px;
-    background: rgba(26, 10, 14, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(26, 10, 14, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 14px;
     cursor: pointer;
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #menu-hamburguer:hover {
-    background: rgba(48, 16, 24, 0.85);
+    background: rgba(48, 16, 24, 0.9);
     border-color: rgba(255, 107, 107, 0.4);
     transform: scale(1.05);
 }
@@ -89,8 +126,9 @@ body::before {
     top: 58px;
     left: 0;
     min-width: 240px;
-    background: rgba(24, 8, 12, 0.9);
+    background: rgba(24, 8, 12, 0.92);
     backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 18px;
     padding: 10px;
@@ -112,7 +150,7 @@ body::before {
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     font-size: 0.92rem;
     font-weight: 500;
@@ -140,14 +178,15 @@ body::before {
     top: 24px;
     right: 24px;
     padding: 12px 24px;
-    background: rgba(26, 10, 14, 0.72);
+    background: rgba(26, 10, 14, 0.75);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 40px;
     cursor: pointer;
     font-size: 0.88rem;
     font-weight: 500;
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 100;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -157,15 +196,16 @@ body::before {
 }
 
 .toggle-btn:hover {
-    background: rgba(48, 16, 24, 0.85);
+    background: rgba(48, 16, 24, 0.9);
     border-color: rgba(255, 107, 107, 0.4);
     transform: scale(1.05);
 }
 
 .toggle-btn.ativo {
-    background: rgba(255, 107, 107, 0.2);
-    border-color: rgba(255, 107, 107, 0.5);
+    background: rgba(255, 107, 107, 0.22);
+    border-color: rgba(255, 107, 107, 0.55);
     color: #ffb3b3;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
 }
 
 /* ===== Card de Mensagem ===== */
@@ -174,14 +214,14 @@ body::before {
     z-index: 2;
     text-align: center;
     padding: 55px 45px;
-    color: rgba(255, 255, 255, 0.94);
+    color: rgba(255, 255, 255, 0.95);
     border-radius: 32px;
     max-width: 840px;
     width: 100%;
     margin: 20px auto;
     line-height: 1.85;
     font-size: 1.05rem;
-    background: linear-gradient(145deg, rgba(34, 12, 18, 0.75), rgba(18, 6, 10, 0.85));
+    background: linear-gradient(145deg, rgba(34, 12, 18, 0.78), rgba(18, 6, 10, 0.88));
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid rgba(255, 107, 107, 0.25);
@@ -224,7 +264,7 @@ body::before {
     margin-bottom: 16px;
     font-weight: 300;
     letter-spacing: 0.2px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.92);
 }
 
 .divider {
@@ -256,10 +296,10 @@ body::before {
     bottom: 24px;
     right: 24px;
     z-index: 100;
-    background: rgba(26, 10, 14, 0.78);
+    background: rgba(26, 10, 14, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 20px;
     padding: 12px 18px;
     display: flex;
@@ -271,7 +311,7 @@ body::before {
 }
 
 .player-widget:hover {
-    background: rgba(36, 14, 20, 0.9);
+    background: rgba(36, 14, 20, 0.92);
     border-color: rgba(255, 107, 107, 0.35);
     transform: translateY(-2px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(255, 107, 107, 0.1);
@@ -362,19 +402,14 @@ body::before {
 
 /* ===== Responsividade ===== */
 @media (max-width: 768px) {
-    body {
-        padding: 80px 16px 100px;
-        align-items: flex-start;
-    }
-
     .mensagem {
-        padding: 36px 22px;
+        padding: 34px 20px;
         font-size: 0.96rem;
         border-radius: 24px;
     }
 
     .mensagem h1 {
-        font-size: 2.4rem;
+        font-size: 2.3rem;
     }
 
     .toggle-btn {

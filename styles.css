@@ -13,22 +13,48 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #150912 url("imagem/julia olhos.jpeg") no-repeat center center fixed;
-    background-size: cover;
+    min-height: 100dvh;
+    background-color: #150912;
     position: relative;
     padding: 24px;
     overflow-x: hidden;
     color: #fff;
 }
 
+/* Camada 1: Blur ambiente que preenche a tela inteira sem barras pretas */
 body::before {
     content: "";
     position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(22, 10, 18, 0.5) 0%, rgba(10, 4, 8, 0.85) 100%);
-    backdrop-filter: blur(2px);
-    pointer-events: none;
+    inset: -30px;
+    background: url("imagem/julia olhos.jpeg") no-repeat center center;
+    background-size: cover;
+    filter: blur(28px) brightness(0.38) saturate(140%);
+    transform: scale(1.06);
     z-index: 0;
+    pointer-events: none;
+}
+
+/* Camada 2: Foto nítida e bem dimensionada */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("imagem/julia olhos.jpeg") no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.85;
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.6));
+    transition: all 0.4s ease;
+}
+
+/* No celular: Foto 100% COMPLETA (contain), sem cortar nada */
+@media (max-width: 768px) {
+    body::after {
+        background-size: contain;
+        background-position: center center;
+        opacity: 0.95;
+    }
 }
 
 /* ===== Corações Flutuantes de Fundo ===== */
