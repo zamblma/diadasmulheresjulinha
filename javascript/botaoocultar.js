@@ -4,14 +4,14 @@ function toggleMensagem() {
 
     if (!msg || !btn) return;
 
-    msg.classList.toggle("hidden");
-    document.body.classList.toggle("modo-foto", msg.classList.contains("hidden"));
+    const oculto = msg.classList.toggle("hidden");
+    document.body.classList.toggle("modo-foto", oculto);
 
-    if (msg.classList.contains("hidden")) {
-        btn.innerHTML = "<span>👁️ Ver mensagem</span>";
+    if (oculto) {
+        btn.innerHTML = "<span>📖 Ver carta</span>";
         btn.classList.add("ativo");
     } else {
-        btn.innerHTML = "<span>✨ Ocultar texto</span>";
+        btn.innerHTML = "<span>🖼️ Ver foto</span>";
         btn.classList.remove("ativo");
     }
 }

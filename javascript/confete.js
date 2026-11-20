@@ -11,7 +11,7 @@ function criarConfete() {
     el.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
     el.style.opacity = "0";
     el.style.pointerEvents = "none";
-    el.style.zIndex = "50";
+    el.style.zIndex = "1";
     var duracao = 3 + Math.random() * 4;
     el.style.animation = "confeteCair " + duracao + "s linear forwards";
     el.style.animationDelay = Math.random() * 2 + "s";
@@ -28,7 +28,7 @@ function criarCoracao() {
     el.style.fontSize = (14 + Math.random() * 18) + "px";
     el.style.opacity = "0";
     el.style.pointerEvents = "none";
-    el.style.zIndex = "50";
+    el.style.zIndex = "1";
     var duracao = 5 + Math.random() * 6;
     el.style.animation = "coracaoSubir " + duracao + "s ease-in forwards";
     el.style.animationDelay = Math.random() * 3 + "s";
@@ -45,7 +45,7 @@ function criarBrilho() {
     el.style.fontSize = (10 + Math.random() * 14) + "px";
     el.style.opacity = "0";
     el.style.pointerEvents = "none";
-    el.style.zIndex = "50";
+    el.style.zIndex = "1";
     var duracao = 1 + Math.random() * 2;
     el.style.animation = "brilhoPiscar " + duracao + "s ease-in-out forwards";
     el.style.animationDelay = Math.random() * 5 + "s";
@@ -53,13 +53,18 @@ function criarBrilho() {
     setTimeout(function () { el.remove(); }, (duracao + 5) * 1000);
 }
 
-for (var i = 0; i < 40; i++) setTimeout(criarConfete, i * 80);
-for (var i = 0; i < 15; i++) setTimeout(criarCoracao, i * 300);
-for (var i = 0; i < 12; i++) setTimeout(criarBrilho, i * 400);
+var ehMobile = window.innerWidth < 768;
+var qtdConfete = ehMobile ? 16 : 28;
+var qtdCoracao = ehMobile ? 8 : 12;
+var qtdBrilho = ehMobile ? 6 : 10;
 
-var intervaloConfete = window.innerWidth < 600 ? 600 : 300;
-var intervaloCoracao = window.innerWidth < 600 ? 1200 : 700;
-var intervaloBrilho = window.innerWidth < 600 ? 1000 : 600;
+for (var i = 0; i < qtdConfete; i++) setTimeout(criarConfete, i * 110);
+for (var i = 0; i < qtdCoracao; i++) setTimeout(criarCoracao, i * 380);
+for (var i = 0; i < qtdBrilho; i++) setTimeout(criarBrilho, i * 500);
+
+var intervaloConfete = ehMobile ? 1200 : 650;
+var intervaloCoracao = ehMobile ? 2200 : 1300;
+var intervaloBrilho = ehMobile ? 2000 : 1200;
 setInterval(criarConfete, intervaloConfete);
 setInterval(criarCoracao, intervaloCoracao);
 setInterval(criarBrilho, intervaloBrilho);

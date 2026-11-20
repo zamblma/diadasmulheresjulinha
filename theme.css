@@ -1,0 +1,737 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* =========================================================
+   Design System — Clean Romantic & Mobile-First
+   ========================================================= */
+:root {
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Tema padrão (Rosé Champagne) */
+    --bg-base: #120d10;
+    --bg-image: none;
+    --accent: #f4acb7;
+    --accent-strong: #e87a90;
+    --accent-soft: rgba(244, 172, 183, 0.14);
+    --accent-border: rgba(244, 172, 183, 0.32);
+
+    /* Superfícies translúcidas clean */
+    --surface: rgba(18, 13, 17, 0.62);
+    --surface-strong: rgba(20, 14, 19, 0.84);
+    --surface-card: rgba(255, 255, 255, 0.06);
+    --surface-card-hover: rgba(255, 255, 255, 0.11);
+    --border-subtle: rgba(255, 255, 255, 0.12);
+    --border-light: rgba(255, 255, 255, 0.22);
+
+    /* Tipografia */
+    --text-primary: #faf5f7;
+    --text-secondary: rgba(250, 245, 247, 0.78);
+    --text-muted: rgba(250, 245, 247, 0.5);
+
+    /* Espaçamento & Raios */
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-pill: 999px;
+
+    /* Safe areas mobile */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* ===== Reset & Ergonomia Mobile ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    padding: calc(76px + var(--safe-top)) 20px calc(92px + var(--safe-bottom));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a,
+input,
+textarea {
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+/* ===== Fundo Fotográfico Inteligente (2 Camadas) ===== */
+body.has-photo::before {
+    content: "";
+    position: fixed;
+    inset: -32px;
+    background-image: var(--bg-image);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: blur(30px) brightness(0.38) saturate(130%);
+    transform: scale(1.06);
+    z-index: 0;
+    pointer-events: none;
+    transition: filter 0.45s ease;
+}
+
+body.has-photo::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.72;
+    transition: opacity 0.45s ease, background-size 0.45s ease;
+}
+
+/* Celular: mostra sempre a foto inteira (contain) sem cortes */
+@media (max-width: 768px) {
+    body.has-photo::after {
+        background-size: contain;
+        opacity: 0.85;
+    }
+}
+
+/* Modo foto (ao ocultar texto): foto 100% nítida e completa em qualquer tela */
+body.has-photo.modo-foto::before {
+    filter: blur(28px) brightness(0.48) saturate(135%);
+}
+
+body.has-photo.modo-foto::after {
+    background-size: contain;
+    opacity: 1;
+}
+
+body.modo-foto .petalas,
+body.modo-foto .baloes,
+body.modo-foto .coracoes {
+    opacity: 0.25;
+    transition: opacity 0.4s ease;
+}
+
+/* ===== Menu Flutuante & Drawer Clean ===== */
+#menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 5, 8, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 990;
+    transition: opacity 0.3s ease;
+}
+
+#menu-backdrop.aberto {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#menu-flutuante {
+    position: fixed;
+    top: calc(16px + var(--safe-top));
+    left: calc(16px + var(--safe-left));
+    z-index: 999;
+}
+
+#menu-hamburguer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: var(--surface-strong);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+#menu-hamburguer:hover {
+    border-color: var(--accent-border);
+    background: rgba(30, 22, 28, 0.9);
+}
+
+#menu-hamburguer:active {
+    transform: scale(0.94);
+}
+
+#menu-hamburguer span {
+    display: block;
+    width: 18px;
+    height: 1.75px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+}
+
+#menu-hamburguer.ativo span:nth-child(1) {
+    transform: translateY(6.75px) rotate(45deg);
+    background: var(--accent);
+}
+
+#menu-hamburguer.ativo span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#menu-hamburguer.ativo span:nth-child(3) {
+    transform: translateY(-6.75px) rotate(-45deg);
+    background: var(--accent);
+}
+
+#menu-lista {
+    position: fixed;
+    top: calc(70px + var(--safe-top));
+    left: calc(16px + var(--safe-left));
+    width: min(270px, calc(100vw - 32px));
+    background: rgba(20, 14, 19, 0.94);
+    backdrop-filter: blur(26px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(160%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 12px;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+    pointer-events: none;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#menu-lista.aberto {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.menu-cabecalho {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--accent);
+    padding: 6px 12px 10px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 6px;
+}
+
+#menu-lista a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 46px;
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+#menu-lista a:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-primary);
+}
+
+#menu-lista a:active {
+    transform: scale(0.98);
+}
+
+#menu-lista a.ativo {
+    color: var(--accent);
+    font-weight: 600;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    pointer-events: none;
+}
+
+.menu-icon {
+    font-size: 1.05rem;
+    width: 22px;
+    text-align: center;
+}
+
+/* ===== Botão Ver Foto / Ocultar Texto ===== */
+.toggle-btn {
+    position: fixed;
+    top: calc(16px + var(--safe-top));
+    right: calc(16px + var(--safe-right));
+    height: 44px;
+    padding: 0 18px;
+    background: var(--surface-strong);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    z-index: 100;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+}
+
+.toggle-btn:hover {
+    border-color: var(--accent-border);
+    background: rgba(30, 22, 28, 0.92);
+}
+
+.toggle-btn:active {
+    transform: scale(0.96);
+}
+
+.toggle-btn.ativo {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent);
+}
+
+/* ===== Cartas / Páginas de Homenagem ===== */
+.mensagem {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    padding: clamp(30px, 5vw, 56px) clamp(22px, 5vw, 52px);
+    background: var(--surface);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    text-align: left;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: opacity 0.38s ease, transform 0.38s ease, visibility 0.38s ease;
+}
+
+.mensagem.hidden {
+    opacity: 0 !important;
+    transform: translateY(14px) scale(0.98) !important;
+    pointer-events: none !important;
+    visibility: hidden;
+}
+
+.eyebrow {
+    display: block;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.mensagem h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(2.15rem, 6vw, 3.25rem);
+    line-height: 1.15;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 26px;
+    letter-spacing: 0.01em;
+}
+
+.mensagem p {
+    font-size: clamp(0.96rem, 2.3vw, 1.06rem);
+    line-height: 1.85;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 18px;
+}
+
+.mensagem p:last-of-type {
+    margin-bottom: 0;
+}
+
+.assinatura-data {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 0.9rem !important;
+    color: var(--text-muted) !important;
+    font-style: italic;
+}
+
+.divider {
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 28px auto;
+    opacity: 0.7;
+}
+
+.te-amo {
+    text-align: center !important;
+    color: var(--accent) !important;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 4.5vw, 1.9rem) !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    margin-bottom: 6px !important;
+}
+
+.sub-assinatura {
+    text-align: center !important;
+    font-size: 0.92rem !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 0 !important;
+}
+
+/* Navegação no rodapé das cartas */
+.nav-cartas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn-namorados,
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.22s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-namorados {
+    background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+    color: #160c10;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.btn-namorados:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+}
+
+.btn-voltar {
+    background: var(--surface-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+}
+
+.btn-voltar:hover {
+    background: var(--surface-card-hover);
+    border-color: var(--accent-border);
+    transform: translateY(-2px);
+}
+
+.btn-voltar.primario {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent);
+}
+
+.btn-voltar:active,
+.btn-namorados:active {
+    transform: scale(0.97);
+}
+
+/* ===== Mini Player de Música Clean (Pill Flutuante) ===== */
+.player-widget {
+    position: fixed;
+    bottom: calc(16px + var(--safe-bottom));
+    right: calc(16px + var(--safe-right));
+    z-index: 100;
+    background: var(--surface-strong);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    padding: 8px 16px 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: calc(100vw - 32px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.42);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.player-widget:hover {
+    border-color: var(--accent-border);
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.player-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.player-widget.tocando .player-icon {
+    animation: pulsarSuave 1.8s ease-in-out infinite;
+}
+
+.player-nome {
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.player-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 10px;
+    border-left: 1px solid var(--border-subtle);
+}
+
+.player-slider {
+    width: 72px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.player-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+    transition: transform 0.18s ease;
+}
+
+.player-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.18);
+}
+
+.player-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.player-porcentagem {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    min-width: 28px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===== Efeitos Decorativos Sutis (Corações, Pétalas, Balões, Confetes) ===== */
+.coracoes,
+.petalas,
+.baloes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.coracao {
+    position: absolute;
+    animation: flutuar linear infinite;
+    opacity: 0;
+}
+
+@keyframes flutuar {
+    0% { transform: translateY(105vh) rotate(0deg) scale(0.85); opacity: 0; }
+    15% { opacity: 0.22; }
+    85% { opacity: 0.22; }
+    100% { transform: translateY(-10vh) rotate(240deg) scale(1); opacity: 0; }
+}
+
+.petala {
+    position: absolute;
+    background-image: url("imagem/margarida1.png");
+    background-size: cover;
+    pointer-events: none;
+    animation: cairPetala linear forwards;
+    opacity: 0;
+}
+
+@keyframes cairPetala {
+    0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity: 0; }
+    12% { opacity: 0.65; }
+    50% { transform: translateY(50vh) translateX(var(--desvio-x, 50px)) rotate(calc(var(--rotacao, 360deg) / 2)); }
+    88% { opacity: 0.65; }
+    100% { transform: translateY(105vh) translateX(calc(var(--desvio-x, 50px) * 1.4)) rotate(var(--rotacao, 720deg)); opacity: 0; }
+}
+
+.balao {
+    position: absolute;
+    animation: subirBalao linear infinite;
+    opacity: 0;
+}
+
+@keyframes subirBalao {
+    0% { transform: translateY(105vh) rotate(-4deg); opacity: 0; }
+    15% { opacity: 0.55; }
+    85% { opacity: 0.55; }
+    100% { transform: translateY(-12vh) rotate(14deg); opacity: 0; }
+}
+
+@keyframes confeteCair {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+    15% { opacity: 0.75; }
+    85% { opacity: 0.75; }
+    100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+
+@keyframes coracaoSubir {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    15% { opacity: 0.5; }
+    85% { opacity: 0.5; }
+    100% { transform: translateY(-105vh) scale(1.15); opacity: 0; }
+}
+
+@keyframes brilhoPiscar {
+    0%, 100% { opacity: 0; transform: scale(0.6); }
+    50% { opacity: 0.65; transform: scale(1.15); }
+}
+
+/* ===== Animações Base ===== */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulsarSuave {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+/* ===== Otimizações Mobile ===== */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        padding: calc(74px + var(--safe-top)) 14px calc(92px + var(--safe-bottom));
+    }
+
+    .mensagem {
+        border-radius: 24px;
+    }
+
+    .nav-cartas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-cartas a {
+        width: 100%;
+    }
+
+    /* Player centralizado na base para conforto do polegar no celular */
+    .player-widget {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        bottom: calc(14px + var(--safe-bottom));
+        width: min(340px, calc(100vw - 28px));
+        justify-content: space-between;
+        padding: 7px 14px 7px 8px;
+    }
+
+    .player-nome {
+        max-width: 135px;
+    }
+
+    .player-slider {
+        width: 64px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
